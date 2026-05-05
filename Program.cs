@@ -1,7 +1,7 @@
-﻿
-using Ovn2_FlowControl.Enums.Services;
-using Ovn2FlowControl.Enums;
+
 using System;
+using Ovn2_FlowControl.Services;
+using Ovn2FlowControl.Enums;
 
 namespace Ovn2FlowControl
 {
@@ -103,11 +103,20 @@ namespace Ovn2FlowControl
             }
 
 
-            var textRepeater = new TextRepeater(FirstRepeatNumber, RepeatCount);
+            try
+            {
+                string repeatedText = new TextRepeater(FirstRepeatNumber, RepeatCount).RepeatText(input);
 
-            string repeatedText = textRepeater.RepeatText(input);
-
-            Console.WriteLine(repeatedText);
+                Console.WriteLine(repeatedText);
+            }
+            catch (ArgumentOutOfRangeException argumentOutOfRangeException)
+            {
+                Console.WriteLine(argumentOutOfRangeException.Message);
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine(argumentException.Message);
+            }
         }
 
         static void HandleThridWord()
@@ -129,8 +138,6 @@ namespace Ovn2FlowControl
             {
                 Console.WriteLine(argumentException.Message);
             }
-
-
         }
 
         static void HandleTicketPrice()
@@ -155,8 +162,6 @@ namespace Ovn2FlowControl
             {
                 Console.WriteLine(argumentException.Message);
             }
-
-
         }
 
         static void HandleGroupTicketPrice()
@@ -186,18 +191,24 @@ namespace Ovn2FlowControl
                 }
 
                 ages[i] = age.Value;
-
             }
 
+            try
+            {
+                int totalPrice = new TicketPriceCalculator().CalculateTotalPrice(ages);
 
-            TicketPriceCalculator calculator = new();
-
-            int totalPrice = calculator.CalculateTotalPrice(ages);
-
-            Console.WriteLine($"Antal besökare: {visitors}");
-            Console.WriteLine($"Total pris: {totalPrice}");
+                Console.WriteLine($"Antal besökare: {visitors}");
+                Console.WriteLine($"Total pris: {totalPrice}");
+            }
+            catch (ArgumentOutOfRangeException argumentOutOfRangeException)
+            {
+                Console.WriteLine(argumentOutOfRangeException.Message);
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine(argumentException.Message);
+            }
 
         }
     }
 }
-

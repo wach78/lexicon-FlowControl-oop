@@ -1,15 +1,11 @@
-﻿using Ovn2FlowControl.Enums;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Security.AccessControl;
-using System.Text;
+using Ovn2FlowControl.Enums;
 
-namespace Ovn2_FlowControl.Enums.Services
+namespace Ovn2_FlowControl.Services
 {
     internal class Ticket
     {
-        public Ticket (TicketPriceType tickeType, int price, string description)
+        public Ticket(TicketPriceType tickeType, int price, string description)
         {
             if (price < 0)
             {

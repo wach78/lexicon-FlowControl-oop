@@ -1,10 +1,7 @@
-﻿using Ovn2FlowControl.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+using Ovn2FlowControl.Enums;
 
-namespace Ovn2_FlowControl.Enums.Services
+namespace Ovn2_FlowControl.Services
 {
     internal class TicketPriceCalculator
     {
@@ -19,7 +16,6 @@ namespace Ovn2_FlowControl.Enums.Services
         private const int YouthPrice = 80;
         private const int AdultPrice = 120;
         private const int SeniorPrice = 90;
-
 
         public Ticket Calculate(int? age)
         {
@@ -56,7 +52,6 @@ namespace Ovn2_FlowControl.Enums.Services
             return CreateTicket(TicketPriceType.Adult, AdultPrice);
         }
 
-
         private static Ticket CreateTicket(TicketPriceType ticketPriceType, int price)
         {
             return new Ticket(
@@ -90,7 +85,7 @@ namespace Ovn2_FlowControl.Enums.Services
 
             foreach (int age in ages)
             {
-                var ticket = Calculate(age);
+                Ticket ticket = Calculate(age);
 
                 totalPrice += ticket.Price;
             }

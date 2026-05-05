@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
-namespace Ovn2_FlowControl.Enums.Services
+namespace Ovn2_FlowControl.Services
 {
     internal class ThirdWordExtractor
     {
@@ -20,7 +18,6 @@ namespace Ovn2_FlowControl.Enums.Services
         }
 
         public string Text { get; }
-
 
         private string[] GetWords()
         {
@@ -41,6 +38,5 @@ namespace Ovn2_FlowControl.Enums.Services
 
             return words[2];
         }
-
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
-namespace Ovn2_FlowControl.Enums.Services
+namespace Ovn2_FlowControl.Services
 {
     internal class TextRepeater
     {
@@ -11,18 +9,14 @@ namespace Ovn2_FlowControl.Enums.Services
         {
             if (firstRepeatNumber < 1)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(firstRepeatNumber),
-                    "First repeat number must be at least 1."
-                );
+                throw new ArgumentOutOfRangeException(nameof(firstRepeatNumber), "First repeat number must be at least 1.");
+
             }
 
             if (repeatCount < firstRepeatNumber)
             {
-                throw new ArgumentOutOfRangeException(
-                    nameof(repeatCount),
-                    "Repeat count must be greater than or equal to first repeat number."
-                );
+                throw new ArgumentOutOfRangeException(nameof(repeatCount), "Repeat count must be greater than or equal to first repeat number.");
+
             }
 
             FirstRepeatNumber = firstRepeatNumber;
@@ -33,7 +27,6 @@ namespace Ovn2_FlowControl.Enums.Services
 
         public int RepeatCount { get; }
 
-        
         public string RepeatText(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
