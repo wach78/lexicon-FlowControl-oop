@@ -48,11 +48,11 @@ namespace Ovn2FlowControl
                         break;
 
                     case MenuChoice.TicketPrice:
-                        UngdomEllerPensionar();
+                        HandleTicketPrice();
                         break;
 
                     case MenuChoice.GroupTicketPrice:
-                        PrisForSallskap();
+                        HandleGroupTicketPrice();
                         break;
 
                     case MenuChoice.RepeatText:
@@ -131,76 +131,73 @@ namespace Ovn2FlowControl
 
         }
 
-        static void UngdomEllerPensionar()
+        static void HandleTicketPrice()
         {
-            Console.Write("Ange ålder: ");
-            string? input = Console.ReadLine();
+            Console.Write("Skriv in ålder: ");
 
-            if (!int.TryParse(input, out int alder))    // Jämför med int.Parse(input) --> "hej" --> Exception
-            {
-                Console.WriteLine("Ogiltig ålder.");
-                return;
-            }
+            int? age = InputInt("Ange en giltig ålder.");
 
-            if (alder < 20)
+            try
             {
-                Console.WriteLine("Ungdomspris: 80kr");
+                TicketPriceCalculator calculator = new();
+
+                var ticket = calculator.Calculate(age);
+
+                Console.WriteLine(ticket);
             }
-            else if (alder > 64)
+            catch (ArgumentOutOfRangeException argumentOutOfRangeException)
             {
-                Console.WriteLine("Pensionärspris: 90kr");
+                Console.WriteLine(argumentOutOfRangeException.Message);
             }
-            else
+            catch (ArgumentException argumentException)
             {
-                Console.WriteLine("Standardpris: 120kr");
+                Console.WriteLine(argumentException.Message);
             }
+           
+
         }
 
-        static void PrisForSallskap()
+        static void HandleGroupTicketPrice()
         {
-            Console.Write("Hur många personer är ni? ");
-            string? antalInput = Console.ReadLine();
+            Console.Write("Skriv antalet bio besökare: ");
 
-            if (!int.TryParse(antalInput, out int antal) || antal <= 0)
+            int? visitors = InputInt("Ange ett giltigt antal biobesökare.");
+
+            if (visitors is null || visitors <= 0)
             {
-                Console.WriteLine("Ogiltigt antal personer.");
+                Console.WriteLine("Ange ett giltigt antal biobesökare");
                 return;
             }
 
-            int total = 0;
+            int? age;
+            int[] ages = new int[visitors.Value];
 
-            for (int i = 1; i <= antal; i++)
+            for (int i = 0; i < visitors; i++)
             {
-                Console.Write($"Ange ålder för person {i}: ");
-                string? alderInput = Console.ReadLine();
+                Console.Write("Skriv in ålder: ");
+                age = InputInt("Ange en giltig ålder.");
 
-                if (!int.TryParse(alderInput, out int alder) || alder < 0)
+                if (age is null || age < 0)
                 {
-                    Console.WriteLine("Ogiltig ålder.");
+                    Console.WriteLine("Åldern är ogiltig");
                     return;
                 }
 
-                if (alder < 5 || alder > 100)
-                {
-                    Console.WriteLine($"Person {i}: Gratis");
-                }
-                else if (alder < 20)
-                {
-                    total += 80;
-                }
-                else if (alder > 64)
-                {
-                    total += 90;
-                }
-                else
-                {
-                    total += 120;
-                }
+                ages[i] = age.Value;
+
             }
 
-            Console.WriteLine($"Antal personer: {antal}");
-            Console.WriteLine($"Totalkostnad: {total} kr");
+
+            TicketPriceCalculator calculator = new();
+
+           int totalPrice =  calculator.CalculateTotalPrice(ages);
+
+            Console.WriteLine($"Antal besökare: {visitors}");
+            Console.WriteLine($"Total pris: {totalPrice}");
+
         }
+
+
     }
 }
 
