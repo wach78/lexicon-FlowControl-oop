@@ -34,20 +34,21 @@ namespace Ovn2_FlowControl.Enums.Services
         public int RepeatCount { get; }
 
         
-        public void RepeatText(string text)
+        public string RepeatText(string text)
         {
-            string separator = ", ";
-            for (int number = FirstRepeatNumber; number <= RepeatCount; number++)
+            if (string.IsNullOrWhiteSpace(text))
             {
-                if (number == RepeatCount)
-                {
-                    separator = ".";
-                }
-
-                Console.Write($"{number}.{text}{separator}");
+                throw new ArgumentException("Text can not be empty.", nameof(text));
             }
 
-            Console.WriteLine();
+            List<string> repeatedTexts = [];
+
+            for (int number = FirstRepeatNumber; number <= RepeatCount; number++)
+            {
+                repeatedTexts.Add($"{number}.{text}");
+            }
+
+            return string.Join(", ", repeatedTexts) + ".";
         }
     }
 }

@@ -105,7 +105,9 @@ namespace Ovn2FlowControl
 
             var textRepeater = new TextRepeater(FirstRepeatNumber, RepeatCount);
 
-            textRepeater.RepeatText(input);
+            string repeatedText = textRepeater.RepeatText(input);
+
+            Console.WriteLine(repeatedText);
         }
 
         static void HandleThridWord()
@@ -123,11 +125,11 @@ namespace Ovn2FlowControl
             {
                 Console.WriteLine(invalidOperationException.Message);
             }
-            catch(ArgumentException argumentException)
+            catch (ArgumentException argumentException)
             {
                 Console.WriteLine(argumentException.Message);
             }
-         
+
 
         }
 
@@ -153,7 +155,7 @@ namespace Ovn2FlowControl
             {
                 Console.WriteLine(argumentException.Message);
             }
-           
+
 
         }
 
@@ -190,14 +192,12 @@ namespace Ovn2FlowControl
 
             TicketPriceCalculator calculator = new();
 
-           int totalPrice =  calculator.CalculateTotalPrice(ages);
+            int totalPrice = calculator.CalculateTotalPrice(ages);
 
             Console.WriteLine($"Antal besökare: {visitors}");
             Console.WriteLine($"Total pris: {totalPrice}");
 
         }
-
-
     }
 }
 
