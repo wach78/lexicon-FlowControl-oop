@@ -1,57 +1,83 @@
 ﻿
 using System;
+using Ovn2FlowControl.Enums;
 
-namespace FlowControl
+namespace Ovn2FlowControl
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            bool running = true;
+            bool isRunning = true;
+            int? choice = 0;
 
-            while (running)
+            while (isRunning)
             {
-                Console.WriteLine("Välkommen till huvudmenyn.");
-                Console.WriteLine("Skriv en siffra för att välja funktion.");
-                Console.WriteLine("0 = Avsluta");
-                Console.WriteLine("1 = Ungdom eller pensionär");
-                Console.WriteLine("2 = Pris för sällskap");
-                Console.WriteLine("3 = Upprepa tio gånger");
-                Console.WriteLine("4 = Det tredje ordet");
-                Console.Write("Ditt val: ");
+                Console.Write(
+                    $"""
+                    Välkommen till huvudmenyn.
+                    Skriv en siffra för att välja funktion.
+                    {(int)MenuChoice.Quit} = Avsluta
+                    {(int)MenuChoice.TicketPrice} = Ungdom eller pensionär
+                    {(int)MenuChoice.GroupTicketPrice} = Pris för sällskap
+                    {(int)MenuChoice.RepeatText} = Upprepa tio gånger
+                    {(int)MenuChoice.PrintWordInterval} = Det tredje ordet
+                    Ditt val:
+                    """
+                 );
 
-                string? input = Console.ReadLine();
+                choice = InputInt("Ogiltigt val. Ange ett nummer.");
 
-                switch (input)
+                if (choice is null)
                 {
-                    case "0":
-                        running = false;
+                    continue;
+                }
+
+                MenuChoice numericChoice = (MenuChoice)choice;
+
+                switch (numericChoice)
+                {
+                    case MenuChoice.Quit:
+                        isRunning = false;
                         Console.WriteLine("Programmet avslutas.");
                         break;
 
-                    case "1":
+                    case MenuChoice.TicketPrice:
                         UngdomEllerPensionar();
                         break;
 
-                    case "2":
+                    case MenuChoice.GroupTicketPrice:
                         PrisForSallskap();
                         break;
 
-                    case "3":
+                    case MenuChoice.RepeatText:
                         UpprepaTioGanger();
                         break;
 
-                    case "4":
+                    case MenuChoice.PrintWordInterval:
                         DetTredjeOrdet();
                         break;
 
                     default:
-                        Console.WriteLine("Felaktig input, välj 0-4.");
+                        Console.WriteLine("Felaktig input");
                         break;
                 }
 
                 Console.WriteLine();
             }
+        }
+
+        static int? InputInt(string errorMessage)
+        {
+            string? input = Console.ReadLine();
+            if (!int.TryParse(input, out int choice))
+            {
+                Console.WriteLine(errorMessage);
+                Console.WriteLine();
+                return null;
+            }
+
+            return choice;
         }
 
         static void UngdomEllerPensionar()

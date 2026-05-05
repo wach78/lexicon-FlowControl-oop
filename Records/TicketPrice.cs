@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Ovn2_FlowControl.Enums;
+using Ovn2FlowControl.Enums;
 
-namespace Ovn2_FlowControl.Records
+namespace Ovn2FlowControl.Records
 {
     sealed record TicketPrice(
              TicketPriceType Type,

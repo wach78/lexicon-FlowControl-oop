@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ovn2_FlowControl.Enums
+namespace Ovn2FlowControl.Enums
 {
     internal enum MenuChoice
     {
