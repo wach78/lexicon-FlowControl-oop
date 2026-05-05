@@ -41,5 +41,16 @@ FlowControl-oop/
 ├── .gitattributes
 └── .gitignore
 
+
+## Code style
+
+The project uses a simple folder structure:
+
+- `Enums` contains enum types
+- `Services` contains classes with application logic
+- `Records` is reserved for simple data objects if needed
+- `Program.cs` handles the console menu and user interaction
+
 ## Notes
-This is a learning project and may be refactored further as new C# concepts are introduced.
+This is a learning project for practicing C# fundamentals and basic OOP.
+
