@@ -22,11 +22,11 @@ namespace Ovn2FlowControl
                     $"""
                     Välkommen till huvudmenyn.
                     Skriv en siffra för att välja funktion.
-                    {(int)MenuChoice.Quit} = Avsluta
                     {(int)MenuChoice.TicketPrice} = Ungdom eller pensionär
                     {(int)MenuChoice.GroupTicketPrice} = Pris för sällskap
                     {(int)MenuChoice.RepeatText} = Upprepa tio gånger
                     {(int)MenuChoice.PrintWordInterval} = Det tredje ordet
+                    {(int)MenuChoice.Quit} = Avsluta
                     Ditt val:
                     """
                  );
