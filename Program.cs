@@ -60,7 +60,7 @@ namespace Ovn2FlowControl
                         break;
 
                     case MenuChoice.PrintWordInterval:
-                        HandleTThridWord();
+                        HandleThridWord();
                         break;
 
                     default:
@@ -108,7 +108,7 @@ namespace Ovn2FlowControl
             textRepeater.RepeatText(input);
         }
 
-        static void HandleTThridWord()
+        static void HandleThridWord()
         {
             Console.Write("Skriv in minst tre ord här: ");
             string? text = Console.ReadLine();
