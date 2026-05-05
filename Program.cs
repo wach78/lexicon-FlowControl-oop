@@ -60,7 +60,7 @@ namespace Ovn2FlowControl
                         break;
 
                     case MenuChoice.PrintWordInterval:
-                        DetTredjeOrdet();
+                        HandleTThridWord();
                         break;
 
                     default:
@@ -106,6 +106,29 @@ namespace Ovn2FlowControl
             var textRepeater = new TextRepeater(FirstRepeatNumber, RepeatCount);
 
             textRepeater.RepeatText(input);
+        }
+
+        static void HandleTThridWord()
+        {
+            Console.Write("Skriv in minst tre ord här: ");
+            string? text = Console.ReadLine();
+
+            try
+            {
+                var thirdWordExtractor = new ThirdWordExtractor(text);
+
+                Console.WriteLine($"Det tredje ordet är: {thirdWordExtractor}");
+            }
+            catch (InvalidOperationException invalidOperationException)
+            {
+                Console.WriteLine(invalidOperationException.Message);
+            }
+            catch(ArgumentException argumentException)
+            {
+                Console.WriteLine(argumentException.Message);
+            }
+         
+
         }
 
         static void UngdomEllerPensionar()
@@ -177,29 +200,6 @@ namespace Ovn2FlowControl
 
             Console.WriteLine($"Antal personer: {antal}");
             Console.WriteLine($"Totalkostnad: {total} kr");
-        }
-
-
-        static void DetTredjeOrdet()
-        {
-            Console.Write("Skriv en mening med minst 3 ord: ");
-            string? mening = Console.ReadLine();
-
-            if (string.IsNullOrWhiteSpace(mening))
-            {
-                Console.WriteLine("Du måste skriva en mening.");
-                return;
-            }
-
-            string[] ord = mening.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            if (ord.Length < 3)
-            {
-                Console.WriteLine("Mening måste innehålla minst 3 ord.");
-                return;
-            }
-
-            Console.WriteLine($"Det tredje ordet är: {ord[2]}");
         }
     }
 }
