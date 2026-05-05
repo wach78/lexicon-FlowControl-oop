@@ -1,15 +1,20 @@
 ﻿
-using System;
+using Ovn2_FlowControl.Enums.Services;
 using Ovn2FlowControl.Enums;
+using System;
 
 namespace Ovn2FlowControl
 {
     internal class Program
     {
+
+        private const int RepeatCount = 10;
+        private const int FirstRepeatNumber = 1;
+
         static void Main(string[] args)
         {
             bool isRunning = true;
-            int? choice = 0;
+            int? choice;
 
             while (isRunning)
             {
@@ -51,7 +56,7 @@ namespace Ovn2FlowControl
                         break;
 
                     case MenuChoice.RepeatText:
-                        UpprepaTioGanger();
+                        HandleRepeatText();
                         break;
 
                     case MenuChoice.PrintWordInterval:
@@ -78,6 +83,29 @@ namespace Ovn2FlowControl
             }
 
             return choice;
+        }
+
+        static bool IsValidText(string? input)
+        {
+            return !string.IsNullOrWhiteSpace(input);
+        }
+
+        static void HandleRepeatText()
+        {
+            Console.Write("Skriv din text här: ");
+            string? input = Console.ReadLine();
+
+            if (!IsValidText(input))
+            {
+                Console.WriteLine("Text can not be empty.");
+                Console.WriteLine();
+                return;
+            }
+
+
+            var textRepeater = new TextRepeater(FirstRepeatNumber, RepeatCount);
+
+            textRepeater.RepeatText(input);
         }
 
         static void UngdomEllerPensionar()
@@ -151,18 +179,6 @@ namespace Ovn2FlowControl
             Console.WriteLine($"Totalkostnad: {total} kr");
         }
 
-        static void UpprepaTioGanger()
-        {
-            Console.Write("Skriv en text: ");
-            string? text = Console.ReadLine();
-
-            for (int i = 1; i <= 10; i++)
-            {
-                Console.Write($"{i}. {text} ");
-            }
-
-            Console.WriteLine();
-        }
 
         static void DetTredjeOrdet()
         {
